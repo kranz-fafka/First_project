@@ -19,6 +19,7 @@ def main():
         if choice == "1":
             print("Dodawanie wydatku\n")
         elif choice == "2":
+            #dodać obsługę pustej listy
             print("Wyświetlanie wydatków\n")
         elif choice == "3":
             print("Zamknięcie programu\n")
