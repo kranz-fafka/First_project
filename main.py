@@ -19,6 +19,7 @@ def add_expense(expenses_list):
         except ValueError:
             print("Błąd! Podaj wartość w formiacie 00.00!")
 
+    #dodać obsługę braku wpisania kategorii
     category = input("Wpisz kategorię: ").strip()
     date = input("Podaj datę w formacie DD-MM-YYYY: ").strip()
     description = input("Dodaj opis: ").strip()
@@ -51,12 +52,11 @@ def main():
         if choice == "1":
             add_expense(expenses)
         elif choice == "2":
-            #dodać obsługę pustej listy
             print("Wyświetlanie wydatków\n")
             if len(expenses) == 0:
                 print("Brak wydatków\n")
             else:
-                print(f"Liczba dotychczasowych wydatkó: {len(expenses)}")
+                print(f"Liczba dotychczasowych wydatków: {len(expenses)}")
                 print(expenses)
         elif choice == "3":
             print("Zamknięcie programu\n")
