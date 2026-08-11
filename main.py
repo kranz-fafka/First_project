@@ -3,10 +3,12 @@ import datetime
 print("To jest projekt do monitorowania wydatków \n")
 
 def show_menu():
+    print("=" * 10)
     print("1. Dodaj wydatek")
     print("2. Pokaż wydatki")
-    print("3. Wyjście")
-    print(" ")
+    print("3. Usuń wydatek")
+    print("4. Wyjście")
+    print("=" * 10)
 
 def add_expense(expenses_list):
     print("Dodawanie nowego wydatku")
@@ -19,15 +21,24 @@ def add_expense(expenses_list):
         except ValueError:
             print("Błąd! Podaj wartość w formiacie 00.00!")
 
-    #dodać obsługę braku wpisania kategorii
-    category = input("Wpisz kategorię: ").strip()
-    date = input("Podaj datę w formacie DD-MM-YYYY: ").strip()
-    description = input("Dodaj opis: ").strip()
+    while True:
+        category = input("Wpisz kategorię: ").capitalize().strip()
 
-    if description == "":
-        description = "BRAK"
+        if category == "":
+            category = "Inne"
+            break
+        if category.isalpha():
+            break
+        else:
+            print("Błąd! Wpisz poprawną kategorię!")
+
+    date = input("Podaj datę w formacie DD-MM-YYYY: ").strip()
     if date == "":
-        date = datetime.date.today().strftime("%d-%m-%Y")
+            date = datetime.date.today().strftime("%d-%m-%Y")
+
+    description = input("Dodaj opis: ").strip()
+    if description == "":
+            description = "Brak opisu"
 
     new_expense = {
         "Kwota" : amount,
@@ -38,6 +49,24 @@ def add_expense(expenses_list):
 
     expenses_list.append(new_expense)
     print("Wydatek został pomyślnie dodany!\n")
+
+def show_expenses(expenses_list):
+    print("Wyświetlanie wszystkich wydatków\n")
+
+    if len(expenses_list) == 0:
+        print("Brak wydatków\n")
+        return
+    else:
+        print(f"Liczba dotychczasowych wydatków: {len(expenses_list)}\n")
+
+    for index, expense in enumerate(expenses_list, start = 1):
+        date = expense["Data"]
+        category = expense["Kategoria"]
+        amount = expense["Kwota"]
+        desc = expense["Opis"]
+
+        print(f"Wydatek nr {index}:\n {date} | {category} | {amount} zł | {desc}")
+        print("=" * 10)
 
 def main():
 
@@ -52,13 +81,10 @@ def main():
         if choice == "1":
             add_expense(expenses)
         elif choice == "2":
-            print("Wyświetlanie wydatków\n")
-            if len(expenses) == 0:
-                print("Brak wydatków\n")
-            else:
-                print(f"Liczba dotychczasowych wydatków: {len(expenses)}")
-                print(expenses)
+            show_expenses(expenses)
         elif choice == "3":
+            print("Usuwanie wydatku!")
+        elif choice == "4":
             print("Zamknięcie programu\n")
             break
         else:
