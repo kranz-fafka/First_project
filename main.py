@@ -1,6 +1,7 @@
 import datetime
 
-print("To jest projekt do monitorowania wydatków \n")
+print(" ")
+print("To jest projekt do monitorowania wydatków")
 
 def show_menu():
     print("=" * 10)
@@ -68,6 +69,15 @@ def show_expenses(expenses_list):
         print(f"Wydatek nr {index}:\n {date} | {category} | {amount} zł | {desc}")
         print("=" * 10)
 
+def sum_expenses(expenses_list):
+
+    total = 0
+
+    for expense in expenses_list:
+        total += expense["Kwota"]
+
+    print(f"Suma wydatków wynosi {total} zł.")
+
 def main():
 
     #Lista do przechowywania słowników z wydatkami
@@ -82,6 +92,7 @@ def main():
             add_expense(expenses)
         elif choice == "2":
             show_expenses(expenses)
+            sum_expenses(expenses)
         elif choice == "3":
             print("Usuwanie wydatku!")
         elif choice == "4":
