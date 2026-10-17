@@ -1,7 +1,9 @@
 import datetime
 
+txt_intro = " To jest projekt do monitorowania wydatków "
+
 print(" ")
-print("To jest projekt do monitorowania wydatków")
+print(txt_intro.center(80, "="))
 
 def show_menu():
     print("=" * 10)
